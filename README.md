@@ -35,6 +35,9 @@ The production preview above runs at http://localhost:4174.
 
 ## Framework and hosting
 
+[Live app](https://react-router-poc-two.vercel.app) ·
+[Vercel project](https://vercel.com/atanas-atanasovs-projects-c9bca4be/react-router-poc)
+
 The app uses React Router Framework mode with server rendering enabled. The
 Vercel preset is configured in `react-router.config.ts` and enabled when
 `VERCEL=1`. Local builds use the standard Node server output so `pnpm start`
