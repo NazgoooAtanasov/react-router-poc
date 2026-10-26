@@ -14,6 +14,7 @@
     "start": "react-router-serve ./build/server/index.js"
   },
   "dependencies": {
+    "@poc/ui": "file:vendor/poc-ui-0.1.0.tgz",
     "@react-router/node": "7.18.4",
     "@react-router/serve": "7.18.4",
     "@vercel/react-router": "1.3.7",
