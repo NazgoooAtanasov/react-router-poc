@@ -60,12 +60,12 @@ declares React Router 7 peer dependencies. React `19.3.1` matches the workshop.
 
 ## Package handoff
 
-The first approved library, `@poc/ui@0.1.0`, is installed from
-`vendor/poc-ui-0.1.0.tgz`. [The archive receipt](vendor/README.md) records the
+The current approved library, `@poc/ui@0.1.1`, is installed from
+`vendor/poc-ui-0.1.1.tgz`. [The archive receipt](vendor/README.md) records the
 workshop source commit, approval, and checksum. Installation uses pnpm:
 
 ```sh
-pnpm add ./vendor/poc-ui-0.1.0.tgz
+pnpm add ./vendor/poc-ui-0.1.1.tgz
 ```
 
 The components route imports `Button` and its types from `@poc/ui`. The root
