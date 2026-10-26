@@ -18,7 +18,7 @@ Open http://localhost:5174. This port keeps the consumer separate from other
 local development servers.
 
 - `/`: overview and navigation.
-- `/components`: the integration point for the approved UI library.
+- `/components`: the approved Button, with variant, size, disabled, and action controls.
 
 ## Check and build
 
@@ -49,7 +49,7 @@ Vercel project uses Node 24, exposes system environment variables, and sets
 
 The project connects to this GitHub repository. Pushes to `main` deploy the
 production app; other branches receive preview deployments. Approved package
-archives will be committed under `vendor/` so Git-based Vercel builds can install
+archives are committed under `vendor/` so Git-based Vercel builds can install
 them without access to a sibling checkout.
 
 To check the Vercel build locally, run `VERCEL=1 pnpm build`. Vercel provides
@@ -60,14 +60,21 @@ declares React Router 7 peer dependencies. React `19.3.1` matches the workshop.
 
 ## Package handoff
 
-After Storybook review and approval, the library archive will be committed under
-`vendor/` and installed with pnpm, for example:
+The first approved library, `@poc/ui@0.1.0`, is installed from
+`vendor/poc-ui-0.1.0.tgz`. [The archive receipt](vendor/README.md) records the
+workshop source commit, approval, and checksum. Installation uses pnpm:
 
 ```sh
 pnpm add ./vendor/poc-ui-0.1.0.tgz
 ```
 
-Component imports will use `@poc/ui`, with styles from `@poc/ui/styles.css`.
+The components route imports `Button` and its types from `@poc/ui`. The root
+imports `@poc/ui/styles.css` once. Button actions and demo state belong to this
+application; the Button implementation stays in the workshop.
+
+The application shell uses system fonts. The Button stylesheet includes Inter
+Bold, and its font notice is served from `public/licenses/Inter-OFL.txt`.
+
 A compatible update changes the archive, its dependency reference and
 `pnpm-lock.yaml`, preserving the existing component usage.
 

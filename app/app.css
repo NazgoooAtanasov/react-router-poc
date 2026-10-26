@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: ui-sans-serif, system-ui, sans-serif;
   color: #172238;
   background: #f7f8fb;
   font-synthesis: none;
@@ -140,27 +140,83 @@ h2 {
   border-top: 1px solid #dce1eb;
 }
 
-.handoff-note p,
-.empty-preview p:not(.eyebrow) {
+.handoff-note p {
   margin: 0;
   color: #536179;
   line-height: 1.75;
 }
 
-.empty-preview {
-  display: grid;
-  place-items: center;
-  min-height: 17rem;
+.component-preview {
   margin-top: 2.5rem;
-  padding: 2rem;
-  border: 1px dashed #b9c4d8;
+  border: 1px solid #dce1eb;
   border-radius: 1rem;
   background: #fff;
-  text-align: center;
 }
 
-.empty-preview > div {
-  max-width: 32rem;
+.component-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-bottom: 1px solid #dce1eb;
+}
+
+.component-controls fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.component-controls legend {
+  margin-bottom: 0.65rem;
+  padding: 0;
+  color: #536179;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.component-controls label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.component-controls input {
+  accent-color: #2d50c6;
+}
+
+.component-preview__canvas {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.component-preview__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.component-preview__status {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.component-preview__hint {
+  margin: 0;
+  color: #627087;
+  font-size: 0.85rem;
+  line-height: 1.6;
 }
 
 .site-footer {
@@ -194,9 +250,5 @@ h2 {
   .site-header {
     align-items: flex-start;
     flex-direction: column;
-  }
-
-  .empty-preview {
-    padding: 1.5rem;
   }
 }

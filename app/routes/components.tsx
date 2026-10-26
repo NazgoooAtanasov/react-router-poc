@@ -1,3 +1,5 @@
+import { Button, type ButtonProps } from '@poc/ui';
+import { useState } from 'react';
 import type { MetaFunction } from 'react-router';
 
 export const meta: MetaFunction = () => [
@@ -8,23 +10,93 @@ export const meta: MetaFunction = () => [
   },
 ];
 
+const variants = [
+  { value: 'primary', label: 'Primary' },
+  { value: 'secondary', label: 'Secondary' },
+] as const;
+
+const sizes = [
+  { value: 'small', label: 'Small' },
+  { value: 'medium', label: 'Medium' },
+] as const;
+
 export default function Components() {
+  const [variant, setVariant] = useState<NonNullable<ButtonProps['variant']>>('primary');
+  const [size, setSize] = useState<NonNullable<ButtonProps['size']>>('small');
+  const [disabled, setDisabled] = useState(false);
+  const [activations, setActivations] = useState(0);
+
   return (
     <>
       <section className="page-header">
         <p className="eyebrow">Component preview</p>
-        <h1>A place for the approved components.</h1>
+        <h1>Try the approved Button.</h1>
         <p className="lede">
-          This route is the integration point for the shared UI library.
+          Choose a variant and size, then try the Button in this application.
+          Its implementation comes from the approved shared UI library.
         </p>
       </section>
-      <section className="empty-preview" aria-labelledby="preview-status">
-        <div>
-          <p className="eyebrow">Ready for the package handoff</p>
-          <h2 id="preview-status">Waiting for the first approved component</h2>
-          <p>
-            After the Button is reviewed in Storybook, its local package archive
-            will provide the component shown here.
+      <section className="component-preview" aria-label="Button preview">
+        <div className="component-controls">
+          <fieldset>
+            <legend>Variant</legend>
+            {variants.map((option) => (
+              <label key={option.value}>
+                <input
+                  type="radio"
+                  name="variant"
+                  checked={variant === option.value}
+                  onChange={() => setVariant(option.value)}
+                />
+                {option.label}
+              </label>
+            ))}
+          </fieldset>
+          <fieldset>
+            <legend>Size</legend>
+            {sizes.map((option) => (
+              <label key={option.value}>
+                <input
+                  type="radio"
+                  name="size"
+                  checked={size === option.value}
+                  onChange={() => setSize(option.value)}
+                />
+                {option.label}
+              </label>
+            ))}
+          </fieldset>
+          <label>
+            <input
+              type="checkbox"
+              checked={disabled}
+              onChange={(event) => setDisabled(event.currentTarget.checked)}
+            />
+            Disable preview
+          </label>
+        </div>
+        <div className="component-preview__canvas">
+          <div className="component-preview__actions">
+            <Button
+              label="Continue"
+              variant={variant}
+              size={size}
+              disabled={disabled}
+              onClick={() => setActivations((count) => count + 1)}
+            />
+            <Button
+              label="Reset count"
+              variant="secondary"
+              size={size}
+              disabled={activations === 0}
+              onClick={() => setActivations(0)}
+            />
+          </div>
+          <p className="component-preview__status" role="status">
+            Continue activated {activations} {activations === 1 ? 'time' : 'times'}.
+          </p>
+          <p className="component-preview__hint">
+            Use Tab to focus the buttons, then Enter or Space to activate them.
           </p>
         </div>
       </section>
