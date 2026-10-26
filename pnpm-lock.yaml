@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@poc/ui':
-        specifier: file:vendor/poc-ui-0.1.1.tgz
-        version: file:vendor/poc-ui-0.1.1.tgz(react@19.3.1)
+        specifier: github:NazgoooAtanasov/ui-workshop#33fab9bfdccdab588d75ad1d09c2dda333931eda
+        version: https://codeload.github.com/NazgoooAtanasov/ui-workshop/tar.gz/33fab9bfdccdab588d75ad1d09c2dda333931eda(react@19.3.1)
       '@react-router/node':
         specifier: 7.18.4
         version: 7.18.4(react-router@7.18.4(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(typescript@6.0.3)
@@ -517,8 +517,8 @@ packages:
   '@oxc-project/types@0.155.0':
     resolution: {integrity: sha512-SeE8JPwW1xs1tHeNycjUtUBdhorRa8o4jlvjwk49R7/Z291i+4DQa7JJIgOm/TaYQZx+QrPQbVJ/9c8dMIZN8Q==}
 
-  '@poc/ui@file:vendor/poc-ui-0.1.1.tgz':
-    resolution: {integrity: sha512-7Z360/fzArC5TGS/GL44pZ5y2ly2YYIGK66EtwHB7h0Ipyl89486XWpHt7VA4udKfDLQ+GApvYenJfRQc06sng==, tarball: file:vendor/poc-ui-0.1.1.tgz}
+  '@poc/ui@https://codeload.github.com/NazgoooAtanasov/ui-workshop/tar.gz/33fab9bfdccdab588d75ad1d09c2dda333931eda':
+    resolution: {tarball: https://codeload.github.com/NazgoooAtanasov/ui-workshop/tar.gz/33fab9bfdccdab588d75ad1d09c2dda333931eda}
     version: 0.1.1
     engines: {node: 24.x}
     peerDependencies:
@@ -2056,7 +2056,7 @@ snapshots:
 
   '@oxc-project/types@0.155.0': {}
 
-  '@poc/ui@file:vendor/poc-ui-0.1.1.tgz(react@19.3.1)':
+  '@poc/ui@https://codeload.github.com/NazgoooAtanasov/ui-workshop/tar.gz/33fab9bfdccdab588d75ad1d09c2dda333931eda(react@19.3.1)':
     dependencies:
       react: 19.3.1
 

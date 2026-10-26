@@ -2,7 +2,7 @@
 
 The application side of the Figma-to-React proof of concept. Shared component
 source lives in the separate `ui-workshop` repository. This application adopts
-approved builds through local package archives.
+approved builds through pinned GitHub dependencies.
 
 ## Run locally
 
@@ -49,8 +49,10 @@ Vercel project uses Node 24, exposes system environment variables, and sets
 
 The project connects to this GitHub repository. Pushes to `main` deploy the
 production app; other branches receive preview deployments. Approved package
-archives are committed under `vendor/` so Git-based Vercel builds can install
-them without access to a sibling checkout.
+revisions are fetched from GitHub during `pnpm install`. The workshop's existing
+`prepack` script builds the library's JavaScript, TypeScript declarations, and
+CSS before pnpm installs the package. Vercel uses the same pinned revision and
+frozen lockfile; no sibling checkout or local archive is required.
 
 To check the Vercel build locally, run `VERCEL=1 pnpm build`. Vercel provides
 this variable when system environment variables are enabled for the project.
@@ -58,14 +60,14 @@ this variable when system environment variables are enabled for the project.
 React Router is pinned to `7.18.4` because the current Vercel adapter (`1.3.7`)
 declares React Router 7 peer dependencies. React `19.3.1` matches the workshop.
 
-## Package handoff
+## UI dependency
 
-The current approved library, `@poc/ui@0.1.1`, is installed from
-`vendor/poc-ui-0.1.1.tgz`. [The archive receipt](vendor/README.md) records the
-workshop source commit, approval, and checksum. Installation uses pnpm:
+The shared library, `@poc/ui`, is installed directly from the workshop commit
+pinned in `package.json` and `pnpm-lock.yaml`. The full commit SHA keeps installs
+reproducible. Installation uses pnpm:
 
 ```sh
-pnpm add ./vendor/poc-ui-0.1.1.tgz
+pnpm install --frozen-lockfile
 ```
 
 The components route imports `Button` and its types from `@poc/ui`. The root
@@ -75,8 +77,20 @@ application; the Button implementation stays in the workshop.
 The application shell uses system fonts. The Button stylesheet includes Inter
 Bold, and its font notice is served from `public/licenses/Inter-OFL.txt`.
 
-A compatible update changes the archive, its dependency reference and
-`pnpm-lock.yaml`, preserving the existing component usage.
+For a future approved release, replace `APPROVED_COMMIT_SHA` with its full commit
+SHA and run this command from the consumer repository:
+
+```sh
+pnpm add '@poc/ui@github:NazgoooAtanasov/ui-workshop#APPROVED_COMMIT_SHA'
+```
+
+A compatible update changes the Git dependency reference in `package.json` and
+`pnpm-lock.yaml`, preserving the existing component usage. Commit both files in
+the consumer update PR. Running `pnpm install` alone keeps the locked revision;
+it does not automatically adopt the latest workshop commit.
+
+Consumer update PR automation is not configured yet. A workshop merge currently
+does not open a PR in this repository.
 
 ## Where things live
 
@@ -92,6 +106,6 @@ A compatible update changes the archive, its dependency reference and
 - [Route configuration](https://reactrouter.com/7.18.4/start/framework/routing)
 - [React Router on Vercel](https://vercel.com/docs/frameworks/frontend/react-router)
 - [Vercel system environment variables](https://vercel.com/docs/environment-variables/system-environment-variables#vercel)
-- [pnpm local package installation](https://pnpm.io/10.x/cli/add)
+- [pnpm Git package sources](https://pnpm.io/10.x/package-sources#git-repository)
 - [Vercel package managers and Corepack](https://vercel.com/docs/package-managers)
 - [Vercel deployment environments](https://vercel.com/docs/deployments/environments)

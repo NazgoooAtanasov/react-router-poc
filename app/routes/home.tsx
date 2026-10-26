@@ -25,8 +25,8 @@ export default function Home() {
       <aside className="handoff-note">
         <h2>One shared implementation</h2>
         <p>
-          Component source lives in the workshop. After approval, a versioned
-          package archive brings that implementation into this application.
+          Component source lives in the workshop. After approval, a pinned
+          GitHub dependency brings that implementation into this application.
         </p>
       </aside>
     </>
