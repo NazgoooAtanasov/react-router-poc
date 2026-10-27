@@ -16,6 +16,9 @@ jobs:
     implement:
         runs-on: ubuntu-latest
         container: node:24-bookworm
+        permissions:
+            contents: write
+            pull-requests: write
 
         steps:
             - name: Install Git and GitHub CLI
@@ -50,6 +53,8 @@ jobs:
                 git clone --branch main \
                     "https://github.com/${SOURCE_REPOSITORY}.git" \
                     "react-router-poc"
+                git -C react-router-poc config user.name 'github-actions[bot]'
+                git -C react-router-poc config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
             - name: Install Dependencies
               working-directory: react-router-poc
