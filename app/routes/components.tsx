@@ -1,4 +1,4 @@
-import { Button, Input, Select, type ButtonProps } from '@poc/ui';
+import { Button, HeroCard, Input, Select, type ButtonProps, type HeroCardProps } from '@poc/ui';
 import { useState } from 'react';
 import type { MetaFunction } from 'react-router';
 
@@ -22,6 +22,13 @@ const sizes = [
 
 const countries = ['Bulgaria', 'France', 'Germany', 'United Kingdom'];
 
+const heroCardVariants = [
+  { value: 'default', label: 'Default' },
+  { value: 'tinted', label: 'Tinted' },
+  { value: 'compact', label: 'Compact' },
+  { value: 'dark', label: 'Dark' },
+] as const;
+
 export default function Components() {
   const [variant, setVariant] = useState<NonNullable<ButtonProps['variant']>>('primary');
   const [size, setSize] = useState<NonNullable<ButtonProps['size']>>('small');
@@ -31,6 +38,9 @@ export default function Components() {
   const [inputDisabled, setInputDisabled] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectDisabled, setSelectDisabled] = useState(false);
+  const [heroCardVariant, setHeroCardVariant] = useState<NonNullable<HeroCardProps['variant']>>('default');
+  const [heroCardDisabled, setHeroCardDisabled] = useState(false);
+  const [heroCardActivations, setHeroCardActivations] = useState(0);
 
   return (
     <>
@@ -38,7 +48,7 @@ export default function Components() {
         <p className="eyebrow">Component preview</p>
         <h1>Try the approved components.</h1>
         <p className="lede">
-          Explore the Button, Input, and Select in this application. Change
+          Explore the Button, Input, Select, and Hero Card in this application. Change
           their values and states to try the approved shared UI components.
         </p>
       </section>
@@ -166,6 +176,48 @@ export default function Components() {
           </Select>
           <p className="component-preview__status" role="status">
             {selectedCountry ? `Selected country: ${selectedCountry}.` : 'No country selected.'}
+          </p>
+        </div>
+      </section>
+      <section className="component-preview" aria-labelledby="hero-card-preview-heading">
+        <h2 className="component-preview__title" id="hero-card-preview-heading">
+          Hero Card
+        </h2>
+        <div className="component-controls">
+          <fieldset>
+            <legend>Style</legend>
+            {heroCardVariants.map((option) => (
+              <label key={option.value}>
+                <input
+                  type="radio"
+                  name="hero-card-variant"
+                  checked={heroCardVariant === option.value}
+                  onChange={() => setHeroCardVariant(option.value)}
+                />
+                {option.label}
+              </label>
+            ))}
+          </fieldset>
+          <label>
+            <input
+              type="checkbox"
+              checked={heroCardDisabled}
+              onChange={(event) => setHeroCardDisabled(event.currentTarget.checked)}
+            />
+            Disable Hero Card action
+          </label>
+        </div>
+        <div className="component-preview__canvas">
+          <HeroCard
+            variant={heroCardVariant}
+            headingLevel={3}
+            buttonProps={{
+              disabled: heroCardDisabled,
+              onClick: () => setHeroCardActivations((count) => count + 1),
+            }}
+          />
+          <p className="component-preview__status" role="status">
+            Get started activated {heroCardActivations} {heroCardActivations === 1 ? 'time' : 'times'}.
           </p>
         </div>
       </section>

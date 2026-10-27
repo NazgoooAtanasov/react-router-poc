@@ -18,8 +18,8 @@ Open http://localhost:5174. This port keeps the consumer separate from other
 local development servers.
 
 - `/`: overview and navigation.
-- `/components`: the approved Button, Input, and Select, with interactive values,
-  button variants and sizes, and independent disabled controls.
+- `/components`: the approved Button, Input, Select, and Hero Card, with interactive
+  values, button variants and sizes, all four card styles, and disabled controls.
 
 ## Check and build
 
@@ -71,10 +71,10 @@ reproducible. Installation uses pnpm:
 pnpm install --frozen-lockfile
 ```
 
-The components route imports `Button`, `Input`, and `Select` from `@poc/ui`.
-The root imports `@poc/ui/styles.css` once. Button actions, input text, country
-selection, and demo state belong to this application; component implementations
-stay in the workshop.
+The components route imports `Button`, `Input`, `Select`, and `HeroCard` from
+`@poc/ui`. The root imports `@poc/ui/styles.css` once. Button and Hero Card actions,
+input text, country selection, and demo state belong to this application;
+component implementations stay in the workshop.
 
 The application shell uses system fonts. The shared UI stylesheet includes Inter
 Regular and Bold, and its font notice is served from `public/licenses/Inter-OFL.txt`.
