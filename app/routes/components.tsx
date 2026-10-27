@@ -1,4 +1,4 @@
-import { Button, type ButtonProps } from '@poc/ui';
+import { Button, Input, Select, type ButtonProps } from '@poc/ui';
 import { useState } from 'react';
 import type { MetaFunction } from 'react-router';
 
@@ -20,23 +20,32 @@ const sizes = [
   { value: 'medium', label: 'Medium' },
 ] as const;
 
+const countries = ['Bulgaria', 'France', 'Germany', 'United Kingdom'];
+
 export default function Components() {
   const [variant, setVariant] = useState<NonNullable<ButtonProps['variant']>>('primary');
   const [size, setSize] = useState<NonNullable<ButtonProps['size']>>('small');
   const [disabled, setDisabled] = useState(false);
   const [activations, setActivations] = useState(0);
+  const [inputValue, setInputValue] = useState('');
+  const [inputDisabled, setInputDisabled] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState('');
+  const [selectDisabled, setSelectDisabled] = useState(false);
 
   return (
     <>
       <section className="page-header">
         <p className="eyebrow">Component preview</p>
-        <h1>Try the approved Button.</h1>
+        <h1>Try the approved components.</h1>
         <p className="lede">
-          Choose a variant and size, then try the Button in this application.
-          Its implementation comes from the approved shared UI library.
+          Explore the Button, Input, and Select in this application. Change
+          their values and states to try the approved shared UI components.
         </p>
       </section>
-      <section className="component-preview" aria-label="Button preview">
+      <section className="component-preview" aria-labelledby="button-preview-heading">
+        <h2 className="component-preview__title" id="button-preview-heading">
+          Button
+        </h2>
         <div className="component-controls">
           <fieldset>
             <legend>Variant</legend>
@@ -72,7 +81,7 @@ export default function Components() {
               checked={disabled}
               onChange={(event) => setDisabled(event.currentTarget.checked)}
             />
-            Disable preview
+            Disable Button
           </label>
         </div>
         <div className="component-preview__canvas">
@@ -97,6 +106,66 @@ export default function Components() {
           </p>
           <p className="component-preview__hint">
             Use Tab to focus the buttons, then Enter or Space to activate them.
+          </p>
+        </div>
+      </section>
+      <section className="component-preview" aria-labelledby="input-preview-heading">
+        <h2 className="component-preview__title" id="input-preview-heading">
+          Input
+        </h2>
+        <div className="component-controls">
+          <label>
+            <input
+              type="checkbox"
+              checked={inputDisabled}
+              onChange={(event) => setInputDisabled(event.currentTarget.checked)}
+            />
+            Disable Input
+          </label>
+        </div>
+        <div className="component-preview__canvas">
+          <Input
+            label="Name"
+            placeholder="Enter your name"
+            hint="Use the name you want others to see."
+            autoComplete="name"
+            value={inputValue}
+            disabled={inputDisabled}
+            onChange={(event) => setInputValue(event.currentTarget.value)}
+          />
+          <p className="component-preview__status" role="status">
+            {inputValue ? `Current value: ${inputValue}` : 'No name entered.'}
+          </p>
+        </div>
+      </section>
+      <section className="component-preview" aria-labelledby="select-preview-heading">
+        <h2 className="component-preview__title" id="select-preview-heading">
+          Select
+        </h2>
+        <div className="component-controls">
+          <label>
+            <input
+              type="checkbox"
+              checked={selectDisabled}
+              onChange={(event) => setSelectDisabled(event.currentTarget.checked)}
+            />
+            Disable Select
+          </label>
+        </div>
+        <div className="component-preview__canvas">
+          <Select
+            label="Country"
+            hint="Choose where you live."
+            value={selectedCountry}
+            disabled={selectDisabled}
+            onChange={(event) => setSelectedCountry(event.currentTarget.value)}
+          >
+            {countries.map((country) => (
+              <option key={country} value={country}>{country}</option>
+            ))}
+          </Select>
+          <p className="component-preview__status" role="status">
+            {selectedCountry ? `Selected country: ${selectedCountry}.` : 'No country selected.'}
           </p>
         </div>
       </section>

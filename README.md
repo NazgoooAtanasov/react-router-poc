@@ -18,7 +18,8 @@ Open http://localhost:5174. This port keeps the consumer separate from other
 local development servers.
 
 - `/`: overview and navigation.
-- `/components`: the approved Button, with variant, size, disabled, and action controls.
+- `/components`: the approved Button, Input, and Select, with interactive values,
+  button variants and sizes, and independent disabled controls.
 
 ## Check and build
 
@@ -70,12 +71,13 @@ reproducible. Installation uses pnpm:
 pnpm install --frozen-lockfile
 ```
 
-The components route imports `Button` and its types from `@poc/ui`. The root
-imports `@poc/ui/styles.css` once. Button actions and demo state belong to this
-application; the Button implementation stays in the workshop.
+The components route imports `Button`, `Input`, and `Select` from `@poc/ui`.
+The root imports `@poc/ui/styles.css` once. Button actions, input text, country
+selection, and demo state belong to this application; component implementations
+stay in the workshop.
 
-The application shell uses system fonts. The Button stylesheet includes Inter
-Bold, and its font notice is served from `public/licenses/Inter-OFL.txt`.
+The application shell uses system fonts. The shared UI stylesheet includes Inter
+Regular and Bold, and its font notice is served from `public/licenses/Inter-OFL.txt`.
 
 For a future approved release, replace `APPROVED_COMMIT_SHA` with its full commit
 SHA and run this command from the consumer repository:
@@ -89,8 +91,10 @@ A compatible update changes the Git dependency reference in `package.json` and
 the consumer update PR. Running `pnpm install` alone keeps the locked revision;
 it does not automatically adopt the latest workshop commit.
 
-Consumer update PR automation is not configured yet. A workshop merge currently
-does not open a PR in this repository.
+After a workshop release merges, its notification workflow dispatches
+`.github/workflows/ui-package-update.yml` here. The consumer's
+`scripts/update-ui.mjs` updates the pinned dependency and lockfile, validates the
+build, and opens an update PR. Merging the consumer PR deploys the production app.
 
 ## Where things live
 
