@@ -1,0 +1,65 @@
+name: UI Package Update
+
+on:
+    workflow_dispatch:
+        inputs:
+            ui_commit:
+                description: The commit sha from the ui package repo
+                required: true
+                type: string
+            ui_version:
+                description: The ui package version
+                required: true
+                type: string
+
+jobs:
+    implement:
+        runs-on: ubuntu-latest
+        container: node:24-bookworm
+
+        steps:
+            - name: Install Git and GitHub CLI
+              run: |
+                apt-get update
+                apt-get install -y --no-install-recommends curl ca-certificates git
+
+                mkdir -p -m 755 /etc/apt/keyrings
+                curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+                  -o /etc/apt/keyrings/githubcli-archive-keyring.gpg
+                chmod a+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
+
+                printf 'deb [arch=%s signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main\n' \
+                  "$(dpkg --print-architecture)" \
+                  > /etc/apt/sources.list.d/github-cli.list
+
+                apt-get update
+                apt-get install -y --no-install-recommends gh
+                gh --version
+
+            - name: Set up pnpm
+              run: |
+                corepack enable pnpm
+                corepack install --global pnpm@10.15.1
+
+            - name: Clone the Repo
+              env:
+                GH_TOKEN: ${{ github.token }}
+                SOURCE_REPOSITORY: ${{ github.repository }}
+              run: |
+                gh auth setup-git --hostname github.com
+                git clone --branch main \
+                    "https://github.com/${SOURCE_REPOSITORY}.git" \
+                    "react-router-poc"
+
+            - name: Install Dependencies
+              working-directory: react-router-poc
+              run: pnpm install --frozen-lockfile
+
+            - name: Update the package version
+              working-directory: react-router-poc
+              env:
+                UI_COMMIT: ${{ inputs.ui_commit }}
+                UI_VERSION: ${{ inputs.ui_version }}
+                GH_TOKEN: ${{ github.token }}
+              run: |
+                node scripts/update-ui.mjs --ui-commit "$UI_COMMIT" --ui-version "$UI_VERSION"
