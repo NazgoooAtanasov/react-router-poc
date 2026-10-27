@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@poc/ui':
-        specifier: github:NazgoooAtanasov/ui-workshop#24e4bdff0c1782ac5f0ae417ea14cac5d5347a90
-        version: https://codeload.github.com/NazgoooAtanasov/ui-workshop/tar.gz/24e4bdff0c1782ac5f0ae417ea14cac5d5347a90(react@19.3.1)
+        specifier: github:NazgoooAtanasov/ui-workshop#48625bb83349360d44502e910068cff4dde19ffa
+        version: https://codeload.github.com/NazgoooAtanasov/ui-workshop/tar.gz/48625bb83349360d44502e910068cff4dde19ffa(react@19.3.1)
       '@react-router/node':
         specifier: 7.18.4
         version: 7.18.4(react-router@7.18.4(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(typescript@6.0.3)
@@ -517,9 +517,9 @@ packages:
   '@oxc-project/types@0.155.0':
     resolution: {integrity: sha512-SeE8JPwW1xs1tHeNycjUtUBdhorRa8o4jlvjwk49R7/Z291i+4DQa7JJIgOm/TaYQZx+QrPQbVJ/9c8dMIZN8Q==}
 
-  '@poc/ui@https://codeload.github.com/NazgoooAtanasov/ui-workshop/tar.gz/24e4bdff0c1782ac5f0ae417ea14cac5d5347a90':
-    resolution: {tarball: https://codeload.github.com/NazgoooAtanasov/ui-workshop/tar.gz/24e4bdff0c1782ac5f0ae417ea14cac5d5347a90}
-    version: 0.4.0
+  '@poc/ui@https://codeload.github.com/NazgoooAtanasov/ui-workshop/tar.gz/48625bb83349360d44502e910068cff4dde19ffa':
+    resolution: {tarball: https://codeload.github.com/NazgoooAtanasov/ui-workshop/tar.gz/48625bb83349360d44502e910068cff4dde19ffa}
+    version: 0.5.0
     engines: {node: 24.x}
     peerDependencies:
       react: ^19.0.0
@@ -901,6 +901,10 @@ packages:
   chokidar@4.0.3:
     resolution: {integrity: sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==}
     engines: {node: '>= 14.16.0'}
+
+  clsx@2.1.1:
+    resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
+    engines: {node: '>=6'}
 
   code-block-writer@10.1.1:
     resolution: {integrity: sha512-67ueh2IRGst/51p0n6FvPrnRjAGHY5F8xdjkgrYE7DDzpJe6qA07RYQ9VcoUeo5ATOjSOiWpSL3SWBRRbempMw==}
@@ -1509,6 +1513,9 @@ packages:
     resolution: {integrity: sha512-DvEy55V3DB7uknRo+4iOGT5fP1slR8wQohVdknigZPMpMstaKJQWhwiYBACJE3Ul2pTnATihhBYnRhZQHGBiRw==}
     engines: {node: '>= 0.8'}
 
+  tailwind-merge@3.7.0:
+    resolution: {integrity: sha512-XPPUyAc+cvspz3lHTcR/QgPfW2A0lv/xQNIjX3HGhLR+Nq2lHaLq5MtTesHn8GUr3W3DguT2KT5x3NVgRtYwmA==}
+
   tinyglobby@0.2.17:
     resolution: {integrity: sha512-wXR/dYpcqKmfWpEdZjiKJOwCNFndD0DMnrW/cYjVGttEkBfVgcLFHoNrlj47mjOVic9yyNu65alsgF4NQyTa2g==}
     engines: {node: '>=12.0.0'}
@@ -2056,9 +2063,11 @@ snapshots:
 
   '@oxc-project/types@0.155.0': {}
 
-  '@poc/ui@https://codeload.github.com/NazgoooAtanasov/ui-workshop/tar.gz/24e4bdff0c1782ac5f0ae417ea14cac5d5347a90(react@19.3.1)':
+  '@poc/ui@https://codeload.github.com/NazgoooAtanasov/ui-workshop/tar.gz/48625bb83349360d44502e910068cff4dde19ffa(react@19.3.1)':
     dependencies:
+      clsx: 2.1.1
       react: 19.3.1
+      tailwind-merge: 3.7.0
 
   '@react-router/dev@7.18.4(@react-router/serve@7.18.4(react-router@7.18.4(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(typescript@6.0.3))(@types/node@24.19.2)(lightningcss@1.33.0)(react-router@7.18.4(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(typescript@6.0.3)(vite@8.3.5(@types/node@24.19.2)(esbuild@0.28.2))':
     dependencies:
@@ -2403,6 +2412,8 @@ snapshots:
   chokidar@4.0.3:
     dependencies:
       readdirp: 4.1.2
+
+  clsx@2.1.1: {}
 
   code-block-writer@10.1.1: {}
 
@@ -3032,6 +3043,8 @@ snapshots:
   source-map@0.6.1: {}
 
   statuses@2.0.2: {}
+
+  tailwind-merge@3.7.0: {}
 
   tinyglobby@0.2.17:
     dependencies:
