@@ -14,7 +14,7 @@
     "start": "react-router-serve ./build/server/index.js"
   },
   "dependencies": {
-    "@poc/ui": "github:NazgoooAtanasov/ui-workshop#33fab9bfdccdab588d75ad1d09c2dda333931eda",
+    "@poc/ui": "github:NazgoooAtanasov/ui-workshop#7d216b4f9332630f9192892a5cecccf6fed4b790",
     "@react-router/node": "7.18.4",
     "@react-router/serve": "7.18.4",
     "@vercel/react-router": "1.3.7",
